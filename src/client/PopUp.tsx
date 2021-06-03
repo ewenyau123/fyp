@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { SquareConfigData } from "./SquareData";
-import { SquareType } from "./SquareType";
+import { ConfigData } from "./SquareData";
+import { Square } from "./Square";
 
 interface Props {
     toggle: () => void;
@@ -30,14 +30,14 @@ export const Popup: React.FC<Props> = ({ toggle, question, setquestionseen, sett
     const [questionshow, setquestionshow] = useState<boolean>(true)
     const [message, setmessage] = useState<string>();
 
-    const squareType: SquareType = SquareConfigData.get(place[player])?.type!;
+    const square: Square = ConfigData.get(place[player])?.type!;
 
-    const squareTypeClass = new Map<SquareType, string>([
-        [SquareType.Airport, "airport"], [SquareType.Chance, "chance"], [SquareType.Go, "passgo"],
-        [SquareType.GoToJail, "go-to-jail"], [SquareType.Jail, "jail"], [SquareType.Property, "property"],
-        [SquareType.CentralPark, "central-park"], [SquareType.Utility, "utility"]
+    const squareClass = new Map<Square, string>([
+        [Square.Airport, "airport"], [Square.Chance, "chance"], [Square.Go, "passgo"],
+        [Square.GoToJail, "go-to-jail"], [Square.Jail, "jail"], [Square.Property, "property"],
+        [Square.CentralPark, "central-park"], [Square.Utility, "utility"]
     ]);
-    squareTypeClass.get(squareType)
+    squareClass.get(square)
 
     const buyporperty = () => {
         axios.post("http://127.0.0.1:4000/buyporperty", {
@@ -138,7 +138,7 @@ export const Popup: React.FC<Props> = ({ toggle, question, setquestionseen, sett
             )
         }
         else {
-            setmessage("Incorrect")
+            setmessage("Incorrect! The correct answer is "+correctanswer)
             axios.post("http://127.0.0.1:4000/deductscore", {
                 diff: question["difficulty"],
                 student: player

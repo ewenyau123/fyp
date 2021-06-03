@@ -299,7 +299,8 @@ async function main() {
         path: '/getquestion',
         handler: (request, h) => {
             const difficult = request.query.difficult
-            let sql = 'SELECT * FROM question WHERE difficulty ="1"'
+            // let sql = 'SELECT * FROM question WHERE difficulty ="'+difficult+'";';
+            let sql = 'SELECT * FROM question WHERE difficulty ="1";';
             return new Promise((resolve, reject) => {
                 connection.query(sql, (err, result) => {
                     if (err) {

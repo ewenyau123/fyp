@@ -1,5 +1,5 @@
 import React from "react";
-import { SquareConfigData, squareGroupColorMap } from "../SquareData";
+import { ConfigData, squareGroupColorMap } from "../SquareData";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { MDBIcon} from 'mdbreact';
 
@@ -10,7 +10,7 @@ interface Props {
 
 export const ColorBar: React.FC<Props> = ({ id ,stationarray}) => {
 
-    const groupId: number = SquareConfigData.get(id)?.groupId!;
+    const groupId: number = ConfigData.get(id)?.groupId!;
 
     const getClassName = () => {
         return "square-color-bar " + squareGroupColorMap.get(groupId);

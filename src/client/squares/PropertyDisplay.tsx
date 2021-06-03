@@ -1,5 +1,5 @@
 import React from "react";
-import { station } from "../NyTheme";
+import { station } from "../Theme";
 import { ColorBar } from "./ColorBar";
 
 interface Props {

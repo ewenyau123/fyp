@@ -1,6 +1,6 @@
 import React from "react";
-import { SquareConfigData } from "./SquareData";
-import { SquareType } from "./SquareType";
+import { ConfigData } from "./SquareData";
+import { Square } from "./Square";
 import { AirportDisplay } from "./squares/AirportDisplay";
 import { ChanceDisplay } from "./squares/ChanceDisplay";
 import { PropertyDisplay } from "./squares/PropertyDisplay";
@@ -16,26 +16,26 @@ interface Props {
 
 export const SquareInfo: React.FC<Props> = ({ id,stationarray }) => {
 
-    const type: SquareType | undefined = SquareConfigData.get(id)?.type;
+    const type: Square | undefined = ConfigData.get(id)?.type;
 
     const getInfo = () => {
-        if (type === SquareType.Airport) {
+        if (type === Square.Airport) {
             return <AirportDisplay id={id} />
         }
-        if (type === SquareType.Chance) {
+        if (type === Square.Chance) {
             return <ChanceDisplay id={id} />
         }
-        if (type === SquareType.CentralPark) {
+        if (type === Square.CentralPark) {
             return <CentralParkDisplay id={id} />
         }
-        if (type === SquareType.Go) {
+        if (type === Square.Go) {
             return <GoDisplay id={id} />
         }
-        if (type === SquareType.Utility) {
+        if (type === Square.Utility) {
             return <UtilityDisplay id={id} />
         }
 
-        if (type === SquareType.Jail || type === SquareType.GoToJail) {
+        if (type === Square.Jail || type === Square.GoToJail) {
             return null;
         }
 

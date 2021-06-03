@@ -1,9 +1,9 @@
-import { SquareType } from "./SquareType";
-import { BoardSection } from "./BoardSection";
+import { Square } from "./Square";
+import { Section } from "./Section";
 
-interface SquareConfigData {
-  readonly type: SquareType;
-  readonly section: BoardSection;
+interface ConfigData {
+  readonly type: Square;
+  readonly section: Section;
   readonly groupId?: number;
 }
 
@@ -14,61 +14,61 @@ const squareGroupColorMap = new Map<number, string>([
 
 
 
-const SquareConfigData = new Map<number, SquareConfigData>();
-SquareConfigData.set(1, { type: SquareType.Go, section: BoardSection.Bottom });
-SquareConfigData.set(2, { type: SquareType.Property, section: BoardSection.Bottom, groupId: 1 });
-SquareConfigData.set(3, { type: SquareType.Chance, section: BoardSection.Bottom });
-SquareConfigData.set(4, { type: SquareType.Property, section: BoardSection.Bottom, groupId: 1 });
-SquareConfigData.set(5, { type: SquareType.Property, section: BoardSection.Bottom, groupId: 15 });
+const ConfigData = new Map<number, ConfigData>();
+ConfigData.set(1, { type: Square.Go, section: Section.Bottom });
+ConfigData.set(2, { type: Square.Property, section: Section.Bottom, groupId: 1 });
+ConfigData.set(3, { type: Square.Chance, section: Section.Bottom });
+ConfigData.set(4, { type: Square.Property, section: Section.Bottom, groupId: 1 });
+ConfigData.set(5, { type: Square.Property, section: Section.Bottom, groupId: 15 });
 
-SquareConfigData.set(6, { type: SquareType.Airport, section: BoardSection.Bottom, groupId: 10 });
+ConfigData.set(6, { type: Square.Airport, section: Section.Bottom, groupId: 10 });
 
-SquareConfigData.set(7, { type: SquareType.Property, section: BoardSection.Bottom, groupId: 2 });
-SquareConfigData.set(8, { type: SquareType.Chance, section: BoardSection.Bottom });
-SquareConfigData.set(9, { type: SquareType.Property, section: BoardSection.Bottom, groupId: 2 });
-SquareConfigData.set(10, { type: SquareType.Property, section: BoardSection.Bottom, groupId: 2 });
+ConfigData.set(7, { type: Square.Property, section: Section.Bottom, groupId: 2 });
+ConfigData.set(8, { type: Square.Chance, section: Section.Bottom });
+ConfigData.set(9, { type: Square.Property, section: Section.Bottom, groupId: 2 });
+ConfigData.set(10, { type: Square.Property, section: Section.Bottom, groupId: 2 });
 
-SquareConfigData.set(11, { type: SquareType.Jail, section: BoardSection.Bottom });
+ConfigData.set(11, { type: Square.Jail, section: Section.Bottom });
 
-SquareConfigData.set(12, { type: SquareType.Property, section: BoardSection.Left, groupId: 3 });
-SquareConfigData.set(13, { type: SquareType.Chance, section: BoardSection.Left });
-SquareConfigData.set(14, { type: SquareType.Property, section: BoardSection.Left, groupId: 3 });
-SquareConfigData.set(15, { type: SquareType.Property, section: BoardSection.Left, groupId: 3 });
+ConfigData.set(12, { type: Square.Property, section: Section.Left, groupId: 3 });
+ConfigData.set(13, { type: Square.Chance, section: Section.Left });
+ConfigData.set(14, { type: Square.Property, section: Section.Left, groupId: 3 });
+ConfigData.set(15, { type: Square.Property, section: Section.Left, groupId: 3 });
 
-SquareConfigData.set(16, { type: SquareType.Airport, section: BoardSection.Left, groupId: 10 });
+ConfigData.set(16, { type: Square.Airport, section: Section.Left, groupId: 10 });
 
-SquareConfigData.set(17, { type: SquareType.Property, section: BoardSection.Left, groupId: 4 });
-SquareConfigData.set(18, { type: SquareType.Utility, section: BoardSection.Left });
-SquareConfigData.set(19, { type: SquareType.Property, section: BoardSection.Left, groupId: 4 });
-SquareConfigData.set(20, { type: SquareType.Property, section: BoardSection.Left, groupId: 4 });
+ConfigData.set(17, { type: Square.Property, section: Section.Left, groupId: 4 });
+ConfigData.set(18, { type: Square.Utility, section: Section.Left });
+ConfigData.set(19, { type: Square.Property, section: Section.Left, groupId: 4 });
+ConfigData.set(20, { type: Square.Property, section: Section.Left, groupId: 4 });
 
-SquareConfigData.set(21, { type: SquareType.CentralPark, section: BoardSection.Top });
+ConfigData.set(21, { type: Square.CentralPark, section: Section.Top });
 
-SquareConfigData.set(22, { type: SquareType.Property, section: BoardSection.Top, groupId: 5 });
-SquareConfigData.set(23, { type: SquareType.Chance, section: BoardSection.Top });
-SquareConfigData.set(24, { type: SquareType.Property, section: BoardSection.Top, groupId: 5 });
-SquareConfigData.set(25, { type: SquareType.Property, section: BoardSection.Top, groupId: 5 });
+ConfigData.set(22, { type: Square.Property, section: Section.Top, groupId: 5 });
+ConfigData.set(23, { type: Square.Chance, section: Section.Top });
+ConfigData.set(24, { type: Square.Property, section: Section.Top, groupId: 5 });
+ConfigData.set(25, { type: Square.Property, section: Section.Top, groupId: 5 });
 
-SquareConfigData.set(26, { type: SquareType.Airport, section: BoardSection.Top, groupId: 10 });
+ConfigData.set(26, { type: Square.Airport, section: Section.Top, groupId: 10 });
 
-SquareConfigData.set(27, { type: SquareType.Property, section: BoardSection.Top, groupId: 6 });
-SquareConfigData.set(28, { type: SquareType.Chance, section: BoardSection.Top });
-SquareConfigData.set(29, { type: SquareType.Property, section: BoardSection.Top, groupId: 6 });
-SquareConfigData.set(30, { type: SquareType.Property, section: BoardSection.Top, groupId: 6 });
+ConfigData.set(27, { type: Square.Property, section: Section.Top, groupId: 6 });
+ConfigData.set(28, { type: Square.Chance, section: Section.Top });
+ConfigData.set(29, { type: Square.Property, section: Section.Top, groupId: 6 });
+ConfigData.set(30, { type: Square.Property, section: Section.Top, groupId: 6 });
 
-SquareConfigData.set(31, { type: SquareType.GoToJail, section: BoardSection.Top });
+ConfigData.set(31, { type: Square.GoToJail, section: Section.Top });
 
-SquareConfigData.set(32, { type: SquareType.Property, section: BoardSection.Right, groupId: 7 });
-SquareConfigData.set(33, { type: SquareType.Chance, section: BoardSection.Right });
-SquareConfigData.set(34, { type: SquareType.Property, section: BoardSection.Right, groupId: 7 });
-SquareConfigData.set(35, { type: SquareType.Property, section: BoardSection.Right, groupId: 7 });
+ConfigData.set(32, { type: Square.Property, section: Section.Right, groupId: 7 });
+ConfigData.set(33, { type: Square.Chance, section: Section.Right });
+ConfigData.set(34, { type: Square.Property, section: Section.Right, groupId: 7 });
+ConfigData.set(35, { type: Square.Property, section: Section.Right, groupId: 7 });
 
-SquareConfigData.set(36, { type: SquareType.Airport, section: BoardSection.Right, groupId: 10 });
+ConfigData.set(36, { type: Square.Airport, section: Section.Right, groupId: 10 });
 
-SquareConfigData.set(37, { type: SquareType.Utility, section: BoardSection.Right });
+ConfigData.set(37, { type: Square.Utility, section: Section.Right });
 
-SquareConfigData.set(38, { type: SquareType.Property, section: BoardSection.Right, groupId: 8 });
-SquareConfigData.set(39, { type: SquareType.Chance, section: BoardSection.Right });
-SquareConfigData.set(40, { type: SquareType.Property, section: BoardSection.Right, groupId: 8 });
+ConfigData.set(38, { type: Square.Property, section: Section.Right, groupId: 8 });
+ConfigData.set(39, { type: Square.Chance, section: Section.Right });
+ConfigData.set(40, { type: Square.Property, section: Section.Right, groupId: 8 });
 
-export { SquareConfigData, squareGroupColorMap };
+export { ConfigData, squareGroupColorMap };

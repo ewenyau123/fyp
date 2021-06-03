@@ -1,5 +1,5 @@
 import React from "react";
-import { station } from "../NyTheme";
+import { station } from "../Theme";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlane } from '@fortawesome/free-solid-svg-icons'
 

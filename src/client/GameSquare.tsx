@@ -1,8 +1,8 @@
 import React from "react";
-import { BoardSection } from "./BoardSection";
-import { SquareConfigData } from "./SquareData";
+import { Section } from "./Section";
+import { ConfigData } from "./SquareData";
 import { SquareInfo } from "./SquareInfo";
-import { SquareType } from "./SquareType";
+import { Square } from "./Square";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { MDBIcon} from 'mdbreact';
 
@@ -14,17 +14,17 @@ interface Props {
 
 export const GameSquare: React.FC<Props> = ({ id,place,stationarray }) => {
 
-  const section: BoardSection = SquareConfigData.get(id)?.section!;
-  const squareType: SquareType = SquareConfigData.get(id)?.type!;
+  const section: Section = ConfigData.get(id)?.section!;
+  const square: Square = ConfigData.get(id)?.type!;
 
-  const sectionMap = new Map<BoardSection, string>([
-    [BoardSection.Top, "top"], [BoardSection.Right, "right"], [BoardSection.Left, "left"], [BoardSection.Bottom, "bottom"]
+  const sectionMap = new Map<Section, string>([
+    [Section.Top, "top"], [Section.Right, "right"], [Section.Left, "left"], [Section.Bottom, "bottom"]
   ]);
 
-  const squareTypeClass = new Map<SquareType, string>([
-    [SquareType.Airport, "airport"], [SquareType.Chance, "chance"], [SquareType.Go, "passgo"],
-    [SquareType.GoToJail, "go-to-jail"], [SquareType.Jail, "jail"], [SquareType.Property, "property"],
-    [SquareType.CentralPark, "central-park"], [SquareType.Utility, "utility"]
+  const squareClass = new Map<Square, string>([
+    [Square.Airport, "airport"], [Square.Chance, "chance"], [Square.Go, "passgo"],
+    [Square.GoToJail, "go-to-jail"], [Square.Jail, "jail"], [Square.Property, "property"],
+    [Square.CentralPark, "central-park"], [Square.Utility, "utility"]
   ]);
 
   const getContainerClassName = () => {
@@ -32,10 +32,10 @@ export const GameSquare: React.FC<Props> = ({ id,place,stationarray }) => {
   };
 
   const getSquareClassName = () => {
-    return "square " + squareTypeClass.get(squareType);
+    return "square " + squareClass.get(square);
   };
   const getSquareabsClassName = () => {
-    return  "absolute " +squareTypeClass.get(squareType) + " "+sectionMap.get(section);
+    return  "absolute " +squareClass.get(square) + " "+sectionMap.get(section);
   };
 
   const getSquareId = () => {

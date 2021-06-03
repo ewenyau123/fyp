@@ -3,9 +3,9 @@ import { GameSquare } from "./GameSquare";
 import axios from "axios";
 import { Popup } from "./PopUp";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { SquareConfigData } from "./SquareData";
-import { SquareType } from "./SquareType";
-import { station } from "./NyTheme";
+import { ConfigData } from "./SquareData";
+import { Square } from "./Square";
+import { station } from "./Theme";
 import { StartPopUp } from "./StartPopUp"
 import { ResultPopUp } from "./ResultPopUp";
 
@@ -23,7 +23,7 @@ export default function GameBoard() {
   const [target, settarget] = useState<number>(3000);
   const [money, setmoney] = useState<Array<number>>([]);
   const [buttonshow, setbuttonshow] = useState<boolean>(false)
-  const squareType: SquareType = SquareConfigData.get(place[player])?.type!;
+  const square: Square = ConfigData.get(place[player])?.type!;
   const [message, setmessage] = useState<String>("Player 1 Turn");
   const [start, setstart] = useState<boolean>(true);
   const [score1, setscore1] = useState<number>(0);
@@ -38,12 +38,12 @@ export default function GameBoard() {
   const [owner, setowner] = useState<any>();
   const [endgame, setendgame] = useState<boolean>(false);
 
-  const squareTypeClass = new Map<SquareType, string>([
-    [SquareType.Airport, "airport"], [SquareType.Chance, "chance"], [SquareType.Go, "passgo"],
-    [SquareType.GoToJail, "go-to-jail"], [SquareType.Jail, "jail"], [SquareType.Property, "property"],
-    [SquareType.CentralPark, "central-park"], [SquareType.Utility, "utility"]
+  const squareClass = new Map<Square, string>([
+    [Square.Airport, "airport"], [Square.Chance, "chance"], [Square.Go, "passgo"],
+    [Square.GoToJail, "go-to-jail"], [Square.Jail, "jail"], [Square.Property, "property"],
+    [Square.CentralPark, "central-park"], [Square.Utility, "utility"]
   ]);
-  squareTypeClass.get(squareType)
+  squareClass.get(square)
   const connect = () => {
     const ws = new W3CWebSocket("ws://172.16.8.145:4000/ws");
 
@@ -118,9 +118,9 @@ export default function GameBoard() {
 
       console.log(place[player]);
 
-      const squareType: SquareType = SquareConfigData.get(place[player])?.type!;
-      console.log(squareTypeClass.get(squareType))
-      if (squareTypeClass.get(squareType) === "property") {
+      const square: Square = ConfigData.get(place[player])?.type!;
+      console.log(squareClass.get(square))
+      if (squareClass.get(square) === "property") {
         if (stationdetail == "0") {
           setbuttonshow(false);
           setrentshow(true);
@@ -130,7 +130,7 @@ export default function GameBoard() {
           setrentshow(false);
         }
       }
-      else if (squareTypeClass.get(squareType) === "chance") {
+      else if (squareClass.get(square) === "chance") {
         const max: number = 6;
         const min: number = 1;
         let difficult: number = Math.floor(Math.random() * (max - min + 1) + min);
