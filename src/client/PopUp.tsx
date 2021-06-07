@@ -87,7 +87,7 @@ export const Popup: React.FC<Props> = ({ toggle, question, setquestionseen, sett
                         }
                     });
                     setarray(dataarray)
-                }).then(()=>{
+                }).then(() => {
                     axios.post("http://127.0.0.1:4000/addsaving", {
                         player: player
                     }).then(() => {
@@ -106,7 +106,7 @@ export const Popup: React.FC<Props> = ({ toggle, question, setquestionseen, sett
                         })
                     })
                 })
-                
+
             }
         )
     }
@@ -135,10 +135,14 @@ export const Popup: React.FC<Props> = ({ toggle, question, setquestionseen, sett
                         data.data[3].saving)
                 })
             }
-            )
+            ).then(() => {
+                axios.post("http://127.0.0.1:4000/correct", {
+                    idno: question["question_id"],
+                })
+            })
         }
         else {
-            setmessage("Incorrect! The correct answer is "+correctanswer)
+            setmessage("Incorrect! The correct answer is " + correctanswer)
             axios.post("http://127.0.0.1:4000/deductscore", {
                 diff: question["difficulty"],
                 student: player
@@ -157,7 +161,12 @@ export const Popup: React.FC<Props> = ({ toggle, question, setquestionseen, sett
                         data.data[3].saving)
                 })
             }
-            )
+            ).then(() => {
+                axios.post("http://127.0.0.1:4000/incorrect", {
+                    idno: question["question_id"],
+                })
+            })
+
         }
 
         setquestionshow(false)

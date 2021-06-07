@@ -257,6 +257,63 @@ async function main() {
 
         },
     })
+    server.route({
+        method: 'POST',
+        path: '/win',
+        handler: (request, h) => {
+            const student = request.payload.winner;
+            const id = parseInt(student) + 1 + 20000;
+            sql = 'UPDATE student SET progress = progress + 1 WHERE student_id = "' + id + '";'
+            return new Promise((resolve, reject) => {
+                connection.query(sql, (err, result) => {
+                    if (err) {
+                        console.log(err)
+                        return reject(err);
+                    }
+                    resolve(result);
+                });
+            });
+
+        },
+    })
+    server.route({
+        method: 'POST',
+        path: '/correct',
+        handler: (request, h) => {
+            const question = request.payload.idno;
+            const id = parseInt(question);
+            sql = 'UPDATE question SET correct = correct + 1 WHERE question_id = "' + id + '";'
+            return new Promise((resolve, reject) => {
+                connection.query(sql, (err, result) => {
+                    if (err) {
+                        console.log(err)
+                        return reject(err);
+                    }
+                    resolve(result);
+                });
+            });
+
+        },
+    })
+    server.route({
+        method: 'POST',
+        path: '/incorrect',
+        handler: (request, h) => {
+            const question = request.payload.idno;
+            const id = parseInt(question);
+            sql = 'UPDATE question SET incorrect = incorrect + 1 WHERE question_id = "' + id + '";'
+            return new Promise((resolve, reject) => {
+                connection.query(sql, (err, result) => {
+                    if (err) {
+                        console.log(err)
+                        return reject(err);
+                    }
+                    resolve(result);
+                });
+            });
+
+        },
+    })
 
 
 
@@ -282,7 +339,7 @@ async function main() {
             const diff = request.payload.diff
             const ID = request.payload.ID_t
             console.log(questiondetail)
-            let sql = "INSERT INTO `question` (`question_id`, `question`, `answers`, `difficulty`, `teacher_id`) VALUES (NULL, '" + questiondetail + "', '" + answer + "', '" + diff + "', '" + ID + "')"
+            let sql = "INSERT INTO `question` (`question_id`, `question`, `answers`, `difficulty`, `teacher_id`,`correct`,`incorrect`) VALUES (NULL, '" + questiondetail + "', '" + answer + "', '" + diff + "', '" + ID + "',0,0)"
             return new Promise((resolve, reject) => {
                 connection.query(sql, (err, result) => {
                     if (err) {
@@ -307,6 +364,21 @@ async function main() {
                         return reject(err);
                     }
                     resolve(JSON.stringify(result));
+                });
+            });
+        },
+    })
+    server.route({
+        method: 'get',
+        path: '/getallquestion',
+        handler: (request, h) => {
+            let sql = 'SELECT * FROM question;';
+            return new Promise((resolve, reject) => {
+                connection.query(sql, (err, result) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    resolve(result);
                 });
             });
         },

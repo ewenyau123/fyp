@@ -84,7 +84,7 @@ export default function GameBoard() {
     let difficult: number = Math.floor(Math.random() * (max - min + 1) + min);
     let stationdetail: String = "";
     console.log(difficult)
-    difficult = 3;
+    // difficult = 3;
     let position = place[player] + difficult
     let playerplace = place
     if (position > 40) {
@@ -134,7 +134,7 @@ export default function GameBoard() {
         const max: number = 6;
         const min: number = 1;
         let difficult: number = Math.floor(Math.random() * (max - min + 1) + min);
-        difficult = 3;
+        // difficult = 3;
         let position = place[player] + difficult
         let playerplace = place
         if (position > 40) {
@@ -146,6 +146,24 @@ export default function GameBoard() {
           playerplace[player] = position
           setplace(playerplace)
         }
+      }
+      else if(squareClass.get(square) === "airport"){
+        axios.post("http://127.0.0.1:4000/payrent", {
+            student: player
+        }).then(() => {
+          alert("paid");
+          axios.post("http://127.0.0.1:4000/getstudent", {
+          }).then((data) => {
+              setter(data.data[0].score,
+                  data.data[1].score,
+                  data.data[2].score,
+                  data.data[3].score,
+                  data.data[0].saving,
+                  data.data[1].saving,
+                  data.data[2].saving,
+                  data.data[3].saving)
+          })
+      })
       }
       else {
         setbuttonshow(false);
@@ -170,6 +188,12 @@ export default function GameBoard() {
   };
   const resulttoggle = () => {
     setendgame(!endgame);
+    setmessage("Player 1 Turn");
+    axios.post("http://127.0.0.1:4000/win", {
+        winner:score.indexOf(Math.max(...score))
+        }).then((data) => {
+          
+        
     axios.get('http://127.0.0.1:4000/initgame').then((result) => {
       console.log(result)
     }
@@ -200,9 +224,11 @@ export default function GameBoard() {
           });
           setarray(dataarray)
         })
+        
       })
 
     })
+  })
     setplace([1, 1, 1, 1]);
     setplayer(0);
   }
@@ -228,16 +254,16 @@ export default function GameBoard() {
     if (score4 === target) {
       settingEnd(true);
     }
-    if (score1 === 0) {
+    if (score1 <= 0) {
       settingEnd(true);
     }
-    if (score2 === 0) {
+    if (score2 <= 0) {
       settingEnd(true);
     }
-    if (score3 === 0) {
+    if (score3 <= 0) {
       settingEnd(true);
     }
-    if (score4 === 0) {
+    if (score4 <= 0) {
       settingEnd(true);
     }
     if (saving1 === 0) {
